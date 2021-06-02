@@ -1,0 +1,25 @@
+version: "3.1"
+services:
+  mysql:
+    image: mysql:8.0.13
+    container_name: mysql
+    # command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+    ports:
+      - 6603:3306
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+      - .:/etc/mysql/conf.d
+      - ./host:/shared
+  app:
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
