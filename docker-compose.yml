@@ -6,6 +6,7 @@ services:
     # command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
+      TZ: America/Mexico_City
     restart: always
     ports:
       - 6603:3306
@@ -23,3 +24,4 @@ services:
       - "8080:80"
     environment:
       PMA_HOST: mysql
+      UPLOAD_LIMIT: 256M
